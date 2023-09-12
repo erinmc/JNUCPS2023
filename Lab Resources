@@ -1,0 +1,17 @@
+Requirements:
+
+- Jamf Protect
+  - At least one computer registered
+- Altair GraphQL
+- Text editor
+- Test computer
+
+Resources:
+- Altair GraphQL
+    - https://altairgraphql.dev/ 
+- Jamf Protect Documentation:
+    - https://learn.jamf.com/bundle/jamf-protect-documentation/page/Jamf_Protect_Documentation.html
+- Jamf’s Protect Github
+    - https://github.com/jamf/jamfprotect/
+    - https://github.com/jamf/jamfprotect/tree/main/jamf_protect_api
+
