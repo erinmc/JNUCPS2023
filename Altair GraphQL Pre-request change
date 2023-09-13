@@ -1,0 +1,16 @@
+ const { client_id, clientId, password } = altair.data.environment,
+ working_client_id = client_id ? client_id : clientId,
+ access_token_url = "https://MY-PROTECT-TENANT-NAME.protect.jamfcloud.com/token",
+ nowInSeconds = () => Date.now() / 1e3,
+ localStorageToken = `token-${working_client_id}`,
+ localStorageTokenExpiry = `token_expiry-${working_client_id}`,
+ tokenExpiry = await altair.storage.get(localStorageTokenExpiry) || 0,
+ authData = JSON.stringify({ client_id: working_client_id, password: password });
+ if (nowInSeconds() >= Number(tokenExpiry)) {
+ const e = { body: authData, headers: { "Content-Type": "application/json" } },
+ t = await altair.helpers.request("POST", access_token_url, e);
+ console.log(t), await altair.storage.set(localStorageToken, t.access_token), await altair.storage.set(localStorageTokenExpiry, nowInSeconds() + t.expires_in);
+ }
+ 
+ const token = await altair.storage.get(localStorageToken);
+ altair.helpers.setEnvironment("auth_token", token);
